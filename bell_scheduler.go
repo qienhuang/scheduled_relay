@@ -56,28 +56,28 @@ cron7	55	16	*	*	?
 
 
      App start
-	     |
-	     V
+        |
+        V
    setting.init( )
 load settings from config.ini
 load cron specifications(string array)
 load http server parameters
-	     |
-	     V
-	   main( )
-         |
-	     V
+        |
+        V
+     main( )
+        |
+        V
    GPIO initialize
      run crons ----------------------------
-	     |                                 |
-		 V                                 V
+	|                                 |
+	V                                 V
  initializeRouters( )                 go cron()
          |
-		 v
+	 v
    run http server -----------------------------------------
-		 |                          |                       |
+	 |                          |                       |
          V                          v                       V
-	  index.html             /api/update_spec      /api/update_ring_duration
+    index.html             /api/update_spec      /api/update_ring_duration
 
 */
 
