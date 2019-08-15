@@ -1,0 +1,15 @@
+[Unit]
+Description=Bell scheduler
+After=network.target
+
+[Service]
+ExecStart=/home/pi/bell_scheduler/bell_scheduler
+WorkingDirectory=/home/pi/bell_scheduler
+StandardOutput=inherit
+StandError=inherit
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target
+

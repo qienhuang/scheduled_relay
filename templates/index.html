@@ -1,0 +1,275 @@
+<!doctype html>
+
+<html>
+	<head>
+		<title>{{.title}}</title>
+		<meta name="viewport" conten="width=device-width, initial-scale=1">
+		<meta charset="UTF-8">
+		<script src="static/js/jquery-3.4.1.min.js"></script>
+		<script src="static/js/bootstrap.min.js"></script>	
+		<link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css"> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<style type="text/css">
+			body{background-color:lightblue;font-size:18px;}
+			.banner_img {
+				background-image: url('/static/img/background.jpg');
+			}
+	</style>
+	</head>
+	<body>
+	<div	class="jumbotron text-left">
+
+			<h2 ><img width="48" height="48" src="static/img/alarm.svg" >
+					Bell schedule setting:
+			</h2>
+	</div>
+ 
+	
+	<div class="container">
+    
+    <div class="row my-4">
+      <h4 class="mx-2">Duration (seconds):</h4>
+      <select id='duration' >
+      </select>
+    </div>
+    
+		<table class="col-md-10 table table-striped table-hover">
+			<thead>
+			<tr>
+				<th>Index</th>
+				<th>Time</th>
+				<th>Day of Week</th>
+        <th></th>
+			</tr>
+		</thead>
+		<tbody>
+		
+	 <!-- DEPRECATED: A method for range nested in golang http/template
+	
+	 {{ $CC := .CronCount}}
+	 {{ $Hrs := .Hours}}
+	 {{ $Min :=.Minutes}}
+	 {{ $D := .Day}}
+	
+ 
+	 {{ range $c := $CC}}
+			<tr id="{{$c}}">
+				<td >#{{$c}}</td>
+				<td>
+					<select id="hour">
+					{{ range $h := $Hrs}}
+						 <option value="{{$h}}">{{$h}}</option>
+					{{end}}
+				</select>
+				:
+				<select id="minute">
+					{{ range $m := $Min}}
+						 <option value="{{$m}}">{{$m}}</option>	 
+					{{end}}
+				</select>
+			</td>
+
+				<td>
+					<select id="day">
+					{{ range $d := $D}}
+						 <option value="{{$d}}">{{$d}}</option>	 
+					{{end}}					
+				</select>
+				</td>
+			</tr>
+		{{end}}
+     -->
+
+		</tbody> 
+		</table>
+		
+		<div class="col-md-10 ">
+			 <button type="button" id="new" class="btn btn-success float-right"><i class='fa fa-plus-circle' aria-hidden='true'></i> New... </button> 
+			 <br><br>
+		 </div> 
+		<button type="button" id="update" class="btn btn-info btn-lg col-md-10 "> Update </button> 
+		<br><br>
+
+	</div>
+
+	</body>
+ 
+	<script >
+		$(document).ready(function(){
+
+		 // alert("{{.CronSpecs}}");
+		/* json example:
+		[{"index":"00","hour":"22","minute":"50","day":"Monday To Friday"},{"index":"01","hour":"22","minute":"45","day":"Monday To Friday"},{"index":"02","hour":"12","minute":"00","day":"Monday To Friday"},{"index":"03","hour":"12","minute":"40","day":"Monday To Friday"},{"index":"04","hour":"15","minute":"00","day":"Monday To Friday"},{"index":"05","hour":"15","minute":"10","day":"Monday To Friday"},{"index":"06","hour":"16","minute":"55","day":"All days"}] 
+		*/
+      // parse the json from server
+			var jsonCronSpecs = JSON.parse("{{.CronSpecs}}");
+
+      var jsonDuration = JSON.parse("{{.RingDuration}}");
+			
+      
+      // Initialize option list
+      // prepare data for hour droplist
+			var listHour = "";
+			for (var i=0;i<24;i++)
+			{
+				if(i<10)
+				{
+				  listHour = listHour + "<option>0" + i +"</option>"					
+				}
+				else
+				{
+				  listHour = listHour + "<option>" + i +"</option>"
+				}
+
+			}
+      
+      // prepare data for minute droplist
+      var listMinute = "";
+			for (var i=0;i<60;i++)
+			{
+				if(i<10)
+				{
+				  listMinute = listMinute + "<option>0" + i +"</option>"					
+				}
+				else
+				{
+				  listMinute = listMinute + "<option>" + i +"</option>"
+				}
+
+			}
+      
+      // prepare data for day droplist
+      var listDay = `<option value='Monday To Friday'>Monday To Friday</option>  
+             <option value='Saturday'>Saturday</option>
+             <option value='Sunday'>Sunday</option>   
+             <option value='All days' selected='selected'>All days</option>`;
+       
+      var deleteButton = "<button type='button' id='delete' class='btn bg-secondary text-white float-right'><i class='fa fa-times' aria-hidden='true'></i> delete</button>";
+      // add blank rows 
+      var specsNumber = 0   
+      if (jsonCronSpecs != null) {
+        specsNumber = Object.keys(jsonCronSpecs).length
+      }
+      for(var i=0;i<specsNumber;i++)
+      {
+        var newRow = "<tr '"+ $("tbody tr").length +"'><td class='index'>#"+ $("tbody tr").length +"</td><td><select id='hour'>"+listHour+"</select> : <select id='minute'>"+listMinute+"</select></td><td><select id='day'>"+listDay+"</select></td><td>"+deleteButton+"</td></tr>";
+				$("table tbody").append(newRow);
+      }
+      
+      // Add list for duration droplist
+      $("#duration").append(listMinute);
+      if(jsonDuration.Duration.length == 1){
+         $("#duration").val("0" + jsonDuration.Duration );     
+      }else{
+        
+        $("#duration").val(jsonDuration.Duration);
+      }
+    
+      // update value of rows
+			/* demo */
+			//alert(myObj[1].day);
+			//$("#0 #hour").val("08");
+			//$("#2 #day").val("Sunday");
+      $.each(jsonCronSpecs, function(index,data){
+					$("tr #hour").eq(index).val(jsonCronSpecs[index].hour);	
+					$("tr #minute").eq(index).val(jsonCronSpecs[index].minute);	
+					$("tr #day").eq(index).val(jsonCronSpecs[index].day);	
+
+			});
+  
+      // Add a new table row
+			$("#new").click(function(){
+				var newRow = "<tr><td class='index'>#"+ $("tbody tr").length +"</td><td><select id='hour'>"+listHour+"</select> : <select id='minute'>"+listMinute+"</select></td><td><select id='day'>"+listDay+"</select></td><td>"+deleteButton+"</td></tr>";
+				$("table tbody").append(newRow);
+			});
+      
+      /*
+      $("tr #delete").click(function(){
+        $(this).closest('tr').remove();
+      });
+      */
+      // Add a new table row
+      $("table").on('click','#delete',function(){
+        $(this).closest('tr').remove();
+        reArrangeIndex();
+      });
+
+      /* post specs format to server    */  
+      $("#update").on('click',function(){
+		     strJson = readTableValues();
+		  
+        /* EXAMPLE: [{"index":"00","hour":"22","minute":"50","day":"Monday To Friday"}] */
+        /* DEMO:
+        var jsonCronSpecs = {index:"04", hour:"44",minute:"50", day:"Monday To Friday"};
+        var tempArray = [jsonCronSpecs,jsonCronSpecs,jsonCronSpecs];
+        //Convert json to string
+        var strJson = JSON.stringify(tempArray)  
+        */
+        $.ajax({
+            type: "post",
+            url: '/api/update_spec',
+            async: false,
+            data: strJson,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function(data) {
+              // alert("data: "+data);
+            } 
+        });
+      });
+
+      /* post ring_duration to server*/
+      $("#duration").on('change', function(){
+        //alert($(this).val());
+        //alert(strJson);
+        $.ajax({
+            type: "post",
+            url: '/api/update_ring_duration',
+            async: false,
+            data: JSON.stringify({duration:$(this).val()}) ,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function(data) {
+              // alert("data: "+data);
+            }
+        });
+      })
+
+
+      /* Re-arrange index# after delete a table row */
+      function reArrangeIndex()
+      {
+        for(var i=0;i< $("tbody tr").length ;i++)
+        {
+          $(".index").eq(i).text("#"+i);
+         
+        }
+      }
+
+      /* Read table values */
+      function readTableValues(){
+    		var jsonStr = '[]'  //initialize string for json
+    		var  obj = JSON.parse(jsonStr);
+        /*
+        //Demo:
+    		obj.push({"index":"00","hour":"22","minute":"50","day":"Monday To Friday"});
+    		obj.push({"index":"01","hour":"23","minute":"55","day":"Monday To Friday"});
+    		jsonStr = JSON.stringify(obj)
+    		alert("Added obj:"+jsonStr);
+        */
+        for(var i=0;i<$("tbody tr").length;i++)
+        {
+      		obj.push({"index":i.toString(), "hour":$("tr #hour").eq(i).val(), "minute": $("tr #minute").eq(i).val(), "day":$("tr #day").eq(i).val()});
+        }
+        
+        jsonStr = JSON.stringify(obj);
+        //alert("Added obj:"+jsonStr);
+        return jsonStr;
+      }
+        
+      
+
+		});
+	</script>
+
+</html>
