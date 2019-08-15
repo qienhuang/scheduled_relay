@@ -22,3 +22,19 @@ The web interface:
 
 [index.html](https://github.com/qienhuang/bell_scheduler/blob/master/templates/index.html)  # html/jQuery
 For users update the bell schedule on PC or mobile phone
+
+#Build the application
+```
+sudo go build
+```
+#Install as a service
+```
+sudo cp systemctl/bell_scheduler.service /etc/systemd/system/
+sudo systemctl enable bell_scheduler.service
+sudo systemctl start bell_scheduler.service
+```
+#Login to the web page
+http://raspberry  (your local raspberry pi hostname)
+
+#A live demo web site:
+[http://scheduller.newddns.com:58000](http://scheduller.newddns.com:58000)
