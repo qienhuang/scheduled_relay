@@ -13,10 +13,12 @@ Using third party packages:
 - cron as scheduler ([github.com/robfig/cron](https://github.com/robfig/cron))
 
 The app runs on console:
-![console](https://raw.githubusercontent.com/qienhuang/bell_scheduler/master/snapshots/console.JPG)
+<img src="https://raw.githubusercontent.com/qienhuang/bell_scheduler/master/snapshots/console.png" width="896" height="556">
+
 
 The web interface:
-![web_page](https://raw.githubusercontent.com/qienhuang/bell_scheduler/master/snapshots/web_page.JPG)
+<img src="https://raw.githubusercontent.com/qienhuang/bell_scheduler/master/snapshots/web_page.png" width="887" height="1054">
+
 
 [index.html](https://github.com/qienhuang/bell_scheduler/blob/master/templates/index.html)  # html/jQuery
 For users update the bell schedule on PC or mobile phone
