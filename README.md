@@ -34,7 +34,7 @@ sudo systemctl enable bell_scheduler.service
 sudo systemctl start bell_scheduler.service
 ```
 #Login to the web page
-http://raspberry  (your local raspberry pi hostname)
+http://raspberrypi  (your local raspberry pi hostname)
 
 #A live demo web site:
 [http://scheduller.newddns.com:58000](http://scheduller.newddns.com:58000)
