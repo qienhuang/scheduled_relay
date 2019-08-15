@@ -444,7 +444,6 @@ func TestGPIO() {
 	pin.High() // Set pin Low
 	log.Println("Ring stop")
 	//pin.Toggle()
-
 }
 
 // DEPRECATED: Generating data for html droplist
@@ -452,29 +451,22 @@ func initializeHtmlList(cronCount *[]string, hours *[]string, minutes *[]string,
 
 	for i := 0; i < len(setting.Cron.Specs); i++ {
 		*cronCount = append(*cronCount, strconv.Itoa(i))
-
 	}
 
 	for i := 0; i <= 23; i++ {
 		if i < 10 {
-
 			*hours = append(*hours, "0"+strconv.Itoa(i))
 		} else {
-
 			*hours = append(*hours, strconv.Itoa(i))
 		}
 	}
 
 	for i := 0; i <= 59; i++ {
 		if i < 10 {
-
 			*minutes = append(*minutes, "0"+strconv.Itoa(i))
 		} else {
-
 			*minutes = append(*minutes, strconv.Itoa(i))
 		}
 	}
-
 	*days = []string{"Monday To Friday", "Saturday", "Sunday", "All days"}
-
 }
