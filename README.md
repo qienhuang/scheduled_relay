@@ -39,7 +39,4 @@ http://raspberrypi  (your local raspberry pi hostname)
 #A live demo web site:
 [http://scheduller.newddns.com:58000](http://scheduller.newddns.com:58000)
 
-User: admin
-
-
-Password: password
+User: admin, Password: password
