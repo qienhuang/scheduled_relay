@@ -12,32 +12,32 @@ uses third party packages:
 - go-rpio for relay control ([github.com/stianeikeland/go-rpio](https://github.com/stianeikeland/go-rpio))
 - cron as scheduler ([github.com/robfig/cron](https://github.com/robfig/cron))
 
-The app runs on console:
+### The app runs on console:
 <img src="https://raw.githubusercontent.com/qienhuang/bell_scheduler/master/snapshots/console.png" width="896" height="556">
 
 
-The web interface:
+### The web interface:
 <img src="https://raw.githubusercontent.com/qienhuang/bell_scheduler/master/snapshots/web_page.png" width="887" height="1054">
 
 
 [index.html](https://github.com/qienhuang/bell_scheduler/blob/master/templates/index.html)  # html/jQuery
 For users update the bell schedule on PC or mobile phone
 
-#Build the application
+### #Build the application
 ```
 sudo go build
 ```
-#Install as a service
+### #Install as a service
 ```
 sudo cp systemctl/bell_scheduler.service /etc/systemd/system/
 sudo systemctl enable bell_scheduler.service
 sudo systemctl start bell_scheduler.service
 ```
-#Login to the web page
+### #Login to the web page
 
 http://raspberrypi  (your local raspberry pi hostname)
 
-#A live demo web site:
+### #A live demo web site:
 
 [http://scheduller.newddns.com:58000](http://scheduller.newddns.com:58000)
 
