@@ -13,11 +13,11 @@ uses third party packages:
 - cron as scheduler ([github.com/robfig/cron](https://github.com/robfig/cron))
 
 ### The app runs on console:
-<img src="https://raw.githubusercontent.com/qienhuang/bell_scheduler/master/snapshots/console.png" width="896" height="556">
+<img src="https://raw.githubusercontent.com/qienhuang/bell_scheduler/master/snapshots/console.png" >
 
 
 ### The web interface:
-<img src="https://raw.githubusercontent.com/qienhuang/bell_scheduler/master/snapshots/web_page.png" width="887" height="1054">
+<img src="https://raw.githubusercontent.com/qienhuang/bell_scheduler/master/snapshots/web_page.png" >
 
 
 [index.html](https://github.com/qienhuang/bell_scheduler/blob/master/templates/index.html)  # html/jQuery
