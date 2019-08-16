@@ -312,7 +312,7 @@ func initializeRouters(router *gin.Engine) {
 	})
 }
 
-// coverter Cron Specification from string to json for jquery
+// covert Cron Specification from string to json for jquery
 func cronSpecsToJson(cronSpecs []string) string {
 
 	var JsonCronSpecs string
