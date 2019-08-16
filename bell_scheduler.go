@@ -378,7 +378,7 @@ func cronSpecsToJson(cronSpecs []string) string {
 
 }
 
-// converter json string to gocron specs
+// convert json string to gocron specs
 func jsonToCronSpecs(json []CronSpec) []string {
 	/* EXAMPLE OF GOCRON SPECS:
 			Sec	Min	Hr	day	Mon	DayOfWeek
