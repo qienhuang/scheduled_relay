@@ -17,7 +17,7 @@ uses third party packages:
 
 
 ### The web interface:
-<img src="https://raw.githubusercontent.com/qienhuang/bell_scheduler/master/snapshots/web_page.png" >
+<img src="https://raw.githubusercontent.com/qienhuang/bell_scheduler/master/snapshots/web_page.png" style="height=100% width=100%"> 
 
 
 [index.html](https://github.com/qienhuang/bell_scheduler/blob/master/templates/index.html)  # html/jQuery
