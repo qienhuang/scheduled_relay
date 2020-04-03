@@ -1,4 +1,4 @@
-# Bell scheduler(web-based scheduled-relay)
+# web-based scheduled-relay (Bell scheduler)
 ## A web-based bell scheduler(web-based scheduled-relay) on Raspberry Pi, coding in golang
 This application was created for an existing warehouse bell system, upgrade from manual to automatic control
 
